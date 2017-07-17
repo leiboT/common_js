@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        table{
+            width:600px;
+            border-collapse:collapse;
+            text-align:center;
+        }
+        td,th{
+            border:1px solid #ccc
+        }
+        thead td{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div id="data"></div>
+<script>
+    var xhr=null;
+
+    if (window.XMLHttpRequest)//modern browser
+        xhr=new XMLHttpRequest();
+    else if (window.ActiveXObject)//ie
+        xhr=new ActiveXObject("Microsoft.XMLHTTP");
+
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState===4&&xhr.status===200){
+            var list = JSON.parse(xhr.responseText);
+            //创建一个table
+            var table= document.createElement("table");
+            //创建thead,将thead追加到table下
+            var thead=table.createTHead();
+            //创建tr,将tr追加到thead下
+            var tr=thead.insertRow();
+            //遍历list中第一个对象的每个key放入th中
+            for(var key in list[0]){
+                //创建td，将td添加到tr下
+                var td=tr.insertCell();
+                //设置th的内容为key
+                td.innerHTML=key;
+            }
+            //多创建一列
+            var td=tr.insertCell();
+            td.innerHTML="opt";
+
+            //创建tbody
+            var tbody=table.createTBody();
+            //遍历list
+            for(var i=0;i<list.length;i++){
+                //创建tr
+                var tr=tbody.insertRow();
+                //遍历当前员工的每个属性
+                for(var key in list[i]){
+                    //创建td
+                    var td=tr.insertCell();
+                    //设置td的内容为key对应的属性值
+                    td.innerHTML=list[i][key];
+                }
+                //再创建一列
+                var td=tr.insertCell();
+                var btn=document.createElement("button");
+                btn.innerHTML="delete";
+                //可执行删除行的操作
+                btn.onclick=function(){
+                    var tr=this.parentNode.parentNode;
+                    var i=tr.cells[0].innerHTML;
+                    if(confirm("确定删除 "+i+" ?"))
+                        table.deleteRow(tr.rowIndex);
+                };
+                td.appendChild(btn);
+            }
+            //将table追加到id为data的div下
+            var div=
+                    document.getElementById("data");
+            div.appendChild(table);
+        }
+    };
+    xhr.open('POST','data/data.json',true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    xhr.send(null);
+</script>
+</body>
+</html>

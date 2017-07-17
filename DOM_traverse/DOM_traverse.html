@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DOM_traverse</title>
+</head>
+<body bgColor="red">
+<div>
+    <!--名称列表-->
+    <ul>
+        <li>
+            <div>
+                <ol>
+                    <li>
+                        詹姆斯
+                    </li>
+                    <li>
+                        科比
+                    </li>
+                </ol>
+            </div>
+        </li>
+        <li>
+            <h3>who is mvp?</h3>
+            <p>try to guess</p>
+        </li>
+    </ul>
+</div>
+<script>
+    //利用iterator 进行深度优先
+    function getC(parent){
+        var iterator=document.createNodeIterator(parent,NodeFilter.SHOW_ALL,null,false); //SHOW_ELEMENT SHOW_TEXT
+        var n=null;
+        while((n=iterator.nextNode())!=null){
+            console.log(n.nodeType===3? n.nodeValue: n.nodeName);
+        }
+    }
+    //getC(document.documentElement);
+    getC(document.body);
+
+//    //递归遍历
+//    function getG(parent){
+//        console.log(parent.nodeType===3?parent.nodeValue:parent.nodeName);
+//        var c=parent.children;
+//        for(var i= 0,len= c.length;i<len;i++){
+//            getG(c[i])
+//        }
+//    }
+//    getG(document.documentElement);
+//    //getG(document.body);
+</script>
+</body>
+</html>

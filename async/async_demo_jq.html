@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="js/jquery-1.11.3.js"></script>
+</head>
+<body>
+
+<script>
+    $.post(
+            url,
+            data,
+            function(){},
+            dataType
+    );
+
+    $.get(
+            url,
+            data,
+            function(){},
+            dataType
+    );
+
+    //一些复杂的异步 建议使用$.ajax
+    $.ajax({
+        type:"xx", //请求类型
+        url:"xx", //请求路径
+        data:{}, //发送的数据 可以是对象，如果是表单 可以传入表单序列化的值  $("表单form的id").serialize()
+        //处理函数
+        beforeSend:function(){
+            console.log("1:发送之前");
+        },
+        success:function(){
+            console.log("2:响应成功");
+        },
+        error:function(){
+            console.log("3:响应失败");
+        },
+        complete:function(){
+            console.log("4:成功失败均执行");
+        },
+        dataType: dataType //服务器响应的数据类型  可选 不写执行智能判断
+    });
+</script>
+</body>
+</html>
