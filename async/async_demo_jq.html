@@ -29,16 +29,16 @@
         data:{}, //发送的数据 可以是对象，如果是表单 可以传入表单序列化的值  $("表单form的id").serialize()
         //处理函数
         beforeSend:function(){
-            console.log("1:发送之前");
+            console.log("1:发送之前，readyState为0");
         },
         success:function(){
-            console.log("2:响应成功");
+            console.log("2:响应成功，readyState为4且status为200");
         },
         error:function(){
-            console.log("3:响应失败");
+            console.log("3:响应失败，readState为4且响应错误信息，错误信息除了得到 null 之外，还可能是 timeout, error, notmodified 和 parsererror");
         },
         complete:function(){
-            console.log("4:成功失败均执行");
+            console.log("4:成功失败均执行，readyState为4");
         },
         dataType: dataType //服务器响应的数据类型  可选 不写执行智能判断
     });
