@@ -27,22 +27,22 @@
 
 <script>
     //事件冒泡
-//    document.getElementById("parent").addEventListener("click",function(e){
-//        alert("parent事件被触发，"+this.id);
-//    },false);
-//    document.getElementById("child").addEventListener("click",function(e){
-//        //e.stopPropagation();
-//        alert("child事件被触发，"+this.id)
-//    },false);
+    document.getElementById("parent").addEventListener("click", function (e){
+        alert("parent事件被触发，"+this.id);
+    }, false);
+    document.getElementById("child").addEventListener("click", function (e){
+        //e.stopPropagation();
+        alert("child事件被触发，"+this.id)
+    } ,false);
 
     //事件捕获
-    document.getElementById("parent").addEventListener("click",function(e){
-        //e.stopPropagation();
-        alert("parent事件被触发，"+this.id);
-    },true);
-    document.getElementById("child").addEventListener("click",function(e){
-        alert("child事件被触发，"+this.id)
-    },true);
+//    document.getElementById("parent").addEventListener("click", function (e){
+//        //e.stopPropagation();
+//        alert("parent事件被触发，"+this.id);
+//    }, true);
+//    document.getElementById("child").addEventListener("click", function (e){
+//        alert("child事件被触发，"+this.id)
+//    }, true);
 
     //结论
     //两者都是描述事件触发时序问题的术语。
